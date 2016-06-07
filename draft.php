@@ -1,4 +1,9 @@
 <?php
+    $xml_file = file_get_contents("test.xml");
+    $xml=simplexml_load_string($xml_file) or die("Error: Cannot create object");
+    foreach($xml as $str) {
+        //var_dump($str["displayName"]);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,6 +16,9 @@
         <style>
             .fill-parent {
                 width: 100%;
+            }
+            .highlighted {
+                background-color: red;
             }
         </style>
     </head>
@@ -30,7 +38,7 @@
                 <div class="col-sm-8">
                     <table class="table-bordered fill-parent">
                         <tr>
-                            <td>hi</td>
+                            <td id="selection">No player selected</td>
                         </tr>
                     </table>
                 </div>
@@ -45,16 +53,31 @@
             <!-- end draft action -->
             <!-- chat box -->
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-8" style="height:200px;overflow:auto">
                     <table class="table-bordered fill-parent">
-                        <tr>
-                            <td>Helloo</td>
+                        <?php foreach($xml as $key=>$value) { ?>
+                        <tr class="player">
+                            <td><?php echo $value["displayName"]; ?></td>
+                            <td><?php echo $value["team"]; ?></td>
+                            <td><?php echo $value["position"]; ?></td>
                         </tr>
+                        <?php } ?>
                     </table>
                 </div>
             </div>
             <!-- end chat box -->
         </div>
         <!-- end container -->
+        <script>
+            $(".player").hover(function() {
+               $(this).addClass("highlighted"); 
+            },
+            function() {
+                $(this).removeClass("highlighted");
+            });
+            $(".player").click(function() {
+                $("#selection").html($(this).html());
+            });
+        </script>
     </body>
 </html>
