@@ -15,7 +15,7 @@
                 width: 100%;
             }
             .highlighted {
-                background-color: red;
+                background-color: gray;
             }
         </style>
     </head>
@@ -35,7 +35,7 @@
                 <div class="col-sm-8">
                     
                     <div class="row">
-                        <div class="col-sm-12" style="height:60vh;overflow:auto">
+                        <div class="col-sm-12" style="border-width:2px;border-style:solid;height:60vh;overflow:auto">
                             <table class="table-bordered fill-parent">
                                 <?php foreach($xml as $key=>$value) { ?>
                                 <tr class="player">
@@ -62,14 +62,18 @@
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <table id="draftedPlayers" class="table-bordered fill-parent">
-                        <tr id="QB"><td>QB</td></tr>
-                        <tr id="RB"><td>RB</td></tr>
-                        <tr id="WR"><td>WR</td></tr>
-                        <tr id="TE"><td>TE</td></tr>
-                        <tr id="K"><td>K</td></tr>
-                        <tr id="DEF"><td>DEF</td></tr>
-                    </table>
+                    <h4>QB</h4>
+                    <ul id="QB"></ul>
+                    <h4>RB</h4>
+                    <ul id="RB"></ul>
+                    <h4>WR</h4>
+                    <ul id="WR"></ul>
+                    <h4>TE</h4>
+                    <ul id="TE"></ul>
+                    <h4>K</h4>
+                    <ul id="K"></ul>
+                    <h4>D/ST</h4>
+                    <ul id="DEF"></ul>
                 </div>
             </div>
         </div>
@@ -78,8 +82,9 @@
         <script>
             var selection;
             var selpos;
+            var selname;
             $("#draftButton").click(function () {
-                $('#' + selpos).after("<tr><td>" + selection + "</td></tr>"); 
+                $('#' + selpos).after("<li>" + selname + "</li>"); 
                 
             });
             $(".player").hover(function() {
@@ -92,6 +97,7 @@
                 $("#selection").html($(".dispName",this).text());
                 selection = $(this).html();
                 selpos = $(".pos", this).text();
+                selname = $(".dispName", this).text();
             });
         </script>
     </body>
