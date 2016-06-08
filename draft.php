@@ -1,9 +1,6 @@
 <?php
     $xml_file = file_get_contents("test.xml");
     $xml=simplexml_load_string($xml_file) or die("Error: Cannot create object");
-    foreach($xml as $str) {
-        //var_dump($str["displayName"]);
-    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,6 +33,20 @@
             <div class="row">
             <!-- chat box -->
                 <div class="col-sm-8">
+                    
+                    <div class="row">
+                        <div class="col-sm-12" style="height:60vh;overflow:auto">
+                            <table class="table-bordered fill-parent">
+                                <?php foreach($xml as $key=>$value) { ?>
+                                <tr class="player">
+                                    <td class="dispName"><?php echo $value["displayName"]; ?></td>
+                                    <td class="team"><?php echo $value["team"]; ?></td>
+                                    <td class="pos"><?php echo $value["position"]; ?></td>
+                                </tr>
+                                <?php } ?>
+                            </table>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm-9">
                             <table class="table-bordered fill-parent">
@@ -49,23 +60,15 @@
                             <button id="draftButton">Draft</button>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-12" style="height:200px;overflow:auto">
-                            <table class="table-bordered fill-parent">
-                                <?php foreach($xml as $key=>$value) { ?>
-                                <tr class="player">
-                                    <td><?php echo $value["displayName"]; ?></td>
-                                    <td><?php echo $value["team"]; ?></td>
-                                    <td><?php echo $value["position"]; ?></td>
-                                </tr>
-                                <?php } ?>
-                            </table>
-                        </div>
-                    </div>
                 </div>
                 <div class="col-sm-4">
                     <table id="draftedPlayers" class="table-bordered fill-parent">
-
+                        <tr id="QB"><td>QB</td></tr>
+                        <tr id="RB"><td>RB</td></tr>
+                        <tr id="WR"><td>WR</td></tr>
+                        <tr id="TE"><td>TE</td></tr>
+                        <tr id="K"><td>K</td></tr>
+                        <tr id="DEF"><td>DEF</td></tr>
                     </table>
                 </div>
             </div>
@@ -74,8 +77,10 @@
         <!-- end container -->
         <script>
             var selection;
+            var selpos;
             $("#draftButton").click(function () {
-               $("#draftedPlayers").append("<tr><td>" + selection + "</td></tr>"); 
+                $('#' + selpos).after("<tr><td>" + selection + "</td></tr>"); 
+                
             });
             $(".player").hover(function() {
                $(this).addClass("highlighted"); 
@@ -84,8 +89,9 @@
                 $(this).removeClass("highlighted");
             });
             $(".player").click(function() {
-                $("#selection").html($(this).html());
+                $("#selection").html($(".dispName",this).text());
                 selection = $(this).html();
+                selpos = $(".pos", this).text();
             });
         </script>
     </body>
