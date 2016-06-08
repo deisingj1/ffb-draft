@@ -33,42 +33,50 @@
                     </h1>
                 </div>
             </div>
-            <!-- Show draft action -->
             <div class="row">
+            <!-- chat box -->
                 <div class="col-sm-8">
-                    <table class="table-bordered fill-parent">
-                        <tr>
-                            <td id="selection">No player selected</td>
-                        </tr>
-                    </table>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <table class="table-bordered fill-parent">
+                                <tr>
+                                    <td id="selection">No player selected</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <button id="draftButton">Draft</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" style="height:200px;overflow:auto">
+                            <table class="table-bordered fill-parent">
+                                <?php foreach($xml as $key=>$value) { ?>
+                                <tr class="player">
+                                    <td><?php echo $value["displayName"]; ?></td>
+                                    <td><?php echo $value["team"]; ?></td>
+                                    <td><?php echo $value["position"]; ?></td>
+                                </tr>
+                                <?php } ?>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-4">
-                    <table class="table-bordered fill-parent">
-                        <tr>
-                            <td>right bar</td>
-                        </tr>
+                    <table id="draftedPlayers" class="table-bordered fill-parent">
+
                     </table>
                 </div>
             </div>
-            <!-- end draft action -->
-            <!-- chat box -->
-            <div class="row">
-                <div class="col-sm-8" style="height:200px;overflow:auto">
-                    <table class="table-bordered fill-parent">
-                        <?php foreach($xml as $key=>$value) { ?>
-                        <tr class="player">
-                            <td><?php echo $value["displayName"]; ?></td>
-                            <td><?php echo $value["team"]; ?></td>
-                            <td><?php echo $value["position"]; ?></td>
-                        </tr>
-                        <?php } ?>
-                    </table>
-                </div>
-            </div>
-            <!-- end chat box -->
         </div>
+
         <!-- end container -->
         <script>
+            var selection;
+            $("#draftButton").click(function () {
+               $("#draftedPlayers").append("<tr><td>" + selection + "</td></tr>"); 
+            });
             $(".player").hover(function() {
                $(this).addClass("highlighted"); 
             },
@@ -77,6 +85,7 @@
             });
             $(".player").click(function() {
                 $("#selection").html($(this).html());
+                selection = $(this).html();
             });
         </script>
     </body>
