@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h1>
-                        Fantasy Draft v1.0
+                        Fantasy Draft v1.0 - Team Name
                     </h1>
                 </div>
             </div>
@@ -62,17 +62,21 @@
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <h4>QB</h4>
+                    Team:
+                    <select>
+                        <option>DRSK</option>
+                    </select>
+                    <h5>QB</h5>
                     <ul id="QB"></ul>
-                    <h4>RB</h4>
+                    <h5>RB</h5>
                     <ul id="RB"></ul>
-                    <h4>WR</h4>
+                    <h5>WR</h5>
                     <ul id="WR"></ul>
-                    <h4>TE</h4>
+                    <h5>TE</h5>
                     <ul id="TE"></ul>
-                    <h4>K</h4>
+                    <h5>K</h5>
                     <ul id="K"></ul>
-                    <h4>D/ST</h4>
+                    <h5>D/ST</h5>
                     <ul id="DEF"></ul>
                 </div>
             </div>
