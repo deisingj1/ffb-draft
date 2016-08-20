@@ -1,33 +1,54 @@
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
 </head>
-<body ng-app="ffDraft" ng-cloak>
-    <div layout>
-        Test
+
+<body ng-app="ffDraft" ng-controller="MainCtrl as vm" ng-cloak>
+  <md-toolbar layout="row">
+    <div class="md-toolbar-tools">
+      <h1>Fantasy Sports League</h1>
+      <span flex></span>
+      <h2>Deerfield River Sharks</h2>
     </div>
-  <!--
-    Your HTML content here
-  -->  
-  
+  </md-toolbar>
+  <md-content layout="row" layout-fill>
+    <div flex="25">
+      <h3>Draft order:</h3>
+    </div>
+    <div flex="50">
+      <h3>Board:</h3>
+    </div>
+    <div flex="25">
+      <h3>Chosen:</h3>
+    </div>
+  </md-content>
+
   <!-- Angular Material requires Angular.js Libraries -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 
   <!-- Angular Material Library -->
-  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-  
+  <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
+
   <!-- Your application bootstrap  -->
-  <script type="text/javascript">    
+  <script type="text/javascript">
     /**
      * You must include the dependency on 'ngMaterial' 
      */
-    angular.module('ffDraft', ['ngMaterial']);
+    angular.module('ffDraft', ['ngMaterial'])
+      .controller('MainCtrl', function($scope, $mdSidenav) {
+        $scope.openLeftMenu = function() {
+          console.log("Left menu");
+          $mdSidenav('left').toggle();
+        }
+      });
   </script>
-  
+
 </body>
+
 </html>
